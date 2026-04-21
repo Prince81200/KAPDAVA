@@ -1,112 +1,43 @@
-
 <!DOCTYPE html>
 <html>
 <head>
 <title>KAPDAVA</title>
 
 <style>
-body { margin:0; font-family: Arial; }
+body { font-family: Arial; margin:0; background:#f5f5f5; }
 
-/* HEADER */
-header {
-  background:white;
-  padding:10px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  box-shadow:0 2px 5px rgba(0,0,0,0.1);
-}
+header { background:white; padding:10px; display:flex; justify-content:space-between; }
 
-.logo {
-  font-weight:bold;
-  font-size:20px;
-}
+.products { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; padding:10px; }
 
-nav a {
-  margin:0 10px;
-  text-decoration:none;
-  color:black;
-  font-size:14px;
-}
+.card { background:white; padding:10px; border-radius:10px; }
 
-/* SEARCH */
-.search {
-  padding:10px;
-}
-
-.search input {
-  width:95%;
-  padding:10px;
-  border-radius:5px;
-  border:1px solid #ccc;
-}
-
-/* BANNER */
-.banner img {
-  width:100%;
-  height:180px;
-  object-fit:cover;
-}
-
-/* PRODUCTS */
-.products {
-  display:grid;
-  grid-template-columns: repeat(2,1fr);
-  gap:10px;
-  padding:10px;
-}
-
-.card {
-  background:white;
-  border-radius:10px;
-  padding:10px;
-  box-shadow:0 2px 10px rgba(0,0,0,0.1);
-}
-
-.card img {
-  width:100%;
-  height:150px;
-  object-fit:cover;
-  border-radius:8px;
-}
-
-button {
-  width:100%;
-  background:#ff3f6c;
-  color:white;
-  padding:10px;
-  border:none;
-  border-radius:5px;
-}
-
-/* CART */
-.cart {
-  position:fixed;
-  bottom:0;
-  width:100%;
-  background:#ff3f6c;
-  text-align:center;
-  padding:10px;
-}
-
-.cart button {
-  background:white;
-  color:#ff3f6c;
-}
+button { background:#ff3f6c; color:white; border:none; padding:8px; width:100%; margin-top:5px; }
 </style>
 
 <script>
-let cart = [];
+let products = [
+  {name:"Shirt ₹499"},
+  {name:"T-Shirt ₹199"},
+  {name:"Jeans ₹999"},
+  {name:"Cargo ₹699"}
+];
 
 function addToCart(item) {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
   cart.push(item);
-  alert(item + " added");
+  localStorage.setItem("cart", JSON.stringify(cart));
+  alert("Added to cart");
 }
 
-function orderNow() {
-  let msg = "Order:%0A";
-  cart.forEach(i => msg += i + "%0A");
-  window.open("https://wa.me/918305853662?text=" + msg);
+function search() {
+  let input = document.getElementById("search").value.toLowerCase();
+  let items = document.getElementsByClassName("card");
+
+  for(let i=0;i<items.length;i++){
+    let text = items[i].innerText.toLowerCase();
+    items[i].style.display = text.includes(input) ? "block":"none";
+  }
 }
 </script>
 
@@ -115,53 +46,39 @@ function orderNow() {
 <body>
 
 <header>
-  <div class="logo">🔥 KAPDAVA</div>
-  <nav>
-    <a href="#">Men</a>
-    <a href="#">Women</a>
-    <a href="#">Kids</a>
-  </nav>
+<h3>KAPDAVA</h3>
+<a href="cart.html">🛒 Cart</a>
 </header>
 
-<div class="search">
-  <input placeholder="Search for products...">
-</div>
-
-<div class="banner">
-  <img src="https://images.unsplash.com/photo-1445205170230-053b83016050">
-</div>
+<input id="search" onkeyup="search()" placeholder="Search..." style="width:95%; padding:10px;">
 
 <div class="products">
 
 <div class="card">
-<img src="https://images.unsplash.com/photo-1520975922284-6c3a3f3d3f3f">
 <p>Shirt ₹499</p>
-<button onclick="addToCart('Shirt ₹499')">Add to Bag</button>
+<button onclick="addToCart('Shirt ₹499')">Add</button>
 </div>
 
 <div class="card">
-<img src="https://images.unsplash.com/photo-1516826957135-700dedea698c">
 <p>T-Shirt ₹199</p>
-<button onclick="addToCart('T-Shirt ₹199')">Add to Bag</button>
+<button onclick="addToCart('T-Shirt ₹199')">Add</button>
 </div>
 
 <div class="card">
-<img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246">
 <p>Jeans ₹999</p>
-<button onclick="addToCart('Jeans ₹999')">Add to Bag</button>
+<button onclick="addToCart('Jeans ₹999')">Add</button>
 </div>
 
 <div class="card">
-<img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2">
 <p>Cargo ₹699</p>
-<button onclick="addToCart('Cargo ₹699')">Add to Bag</button>
+<button onclick="addToCart('Cargo ₹699')">Add</button>
 </div>
 
-</div>
-
-<div class="cart">
-<button onclick="orderNow()">🛒 Place Order</button>
 </div>
 
 </body>
 </html>
+
+
+
+
