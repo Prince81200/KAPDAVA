@@ -1,3 +1,5 @@
+
+   
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,6 +16,13 @@ header {
   font-size:24px;
 }
 
+.search { text-align:center; margin:10px; }
+
+input {
+  padding:10px;
+  width:60%;
+}
+
 .products {
   display:flex;
   flex-wrap:wrap;
@@ -24,15 +33,13 @@ header {
 
 .card {
   background:white;
-  width:170px;
+  width:160px;
   padding:10px;
   border-radius:10px;
   text-align:center;
 }
 
 .card img { width:100%; border-radius:10px; }
-
-select { margin-top:5px; padding:5px; }
 
 button {
   background:green;
@@ -52,15 +59,24 @@ button {
   padding:10px;
 }
 
-.cart button { background:orange; }
+.cart button {
+  background:orange;
+}
 </style>
 
 <script>
 let cart = [];
 
-function addToCart(name, price, qty) {
-  cart.push(name + " x" + qty + " = ₹" + (price*qty));
-  alert(name + " added (" + qty + ")");
+let products = [
+  {name:"Shirt ₹499"},
+  {name:"T-Shirt ₹199"},
+  {name:"T-Shirt Lower ₹150"},
+  {name:"Jeans ₹999"}
+];
+
+function addToCart(item) {
+  cart.push(item);
+  alert(item + " added");
 }
 
 function orderNow() {
@@ -69,37 +85,15 @@ function orderNow() {
   window.open("https://wa.me/918305853662?text=" + msg);
 }
 
-function generateProducts() {
-  let container = document.getElementById("products");
+function searchProduct() {
+  let input = document.getElementById("search").value.toLowerCase();
+  let cards = document.getElementsByClassName("card");
 
-  let categories = [
-    {name:"Shirt", price:499},
-    {name:"T-Shirt", price:199},
-    {name:"Pant", price:799},
-    {name:"Cargo", price:699}
-  ];
-
-  categories.forEach(cat => {
-    for(let i=1;i<=50;i++) {
-
-      let div = document.createElement("div");
-      div.className = "card";
-
-      div.innerHTML = `
-        <img src="https://source.unsplash.com/200x200/?${cat.name}">
-        <p>${cat.name} ${i} ₹${cat.price}</p>
-        <select>
-          <option>1</option><option>5</option><option>10</option><option>50</option><option>100</option>
-        </select>
-        <button onclick="addToCart('${cat.name} ${i}',${cat.price}, this.previousElementSibling.value)">Add</button>
-      `;
-
-      container.appendChild(div);
-    }
-  });
+  for (let i = 0; i < cards.length; i++) {
+    let text = cards[i].innerText.toLowerCase();
+    cards[i].style.display = text.includes(input) ? "block" : "none";
+  }
 }
-
-window.onload = generateProducts;
 </script>
 
 </head>
@@ -108,7 +102,37 @@ window.onload = generateProducts;
 
 <header>🔥 KAPDAVA</header>
 
-<div id="products" class="products"></div>
+<div class="search">
+  <input id="search" onkeyup="searchProduct()" placeholder="Search (t shirt, lower...)">
+</div>
+
+<div class="products">
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1520975922284-6c3a3f3d3f3f">
+<p>Shirt ₹499</p>
+<button onclick="addToCart('Shirt ₹499')">Add</button>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1516826957135-700dedea698c">
+<p>T-Shirt ₹199</p>
+<button onclick="addToCart('T-Shirt ₹199')">Add</button>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1593030761757-71fae45fa0e7">
+<p>T-Shirt Lower ₹150</p>
+<button onclick="addToCart('T-Shirt Lower ₹150')">Add</button>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246">
+<p>Jeans ₹999</p>
+<button onclick="addToCart('Jeans ₹999')">Add</button>
+</div>
+
+</div>
 
 <div class="cart">
 <button onclick="orderNow()">🛒 Order on WhatsApp</button>
