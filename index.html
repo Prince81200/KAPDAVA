@@ -2,20 +2,195 @@
 <html>
 <head>
 <title>KAPDAVA</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #f5f5f5;
+}
+
+/* HEADER */
+header {
+  background: black;
+  color: white;
+  padding: 15px;
+  text-align: center;
+  font-size: 28px;
+}
+
+/* NAVBAR */
+nav {
+  background: #222;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 10px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* SEARCH */
+.search {
+  text-align: center;
+  margin: 20px;
+}
+
+input {
+  padding: 10px;
+  width: 60%;
+}
+
+/* SLIDER */
+.slider {
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+}
+
+.slider img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+/* PRODUCTS */
+.section {
+  margin: 20px;
+}
+
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.card {
+  background: white;
+  width: 200px;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.card img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+button {
+  background: green;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+/* FOOTER */
+footer {
+  background: black;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  margin-top: 20px;
+}
+</style>
+
+<script>
+function showCategory(cat) {
+  document.getElementById("men").style.display = "none";
+  document.getElementById("women").style.display = "none";
+  document.getElementById("kids").style.display = "none";
+
+  document.getElementById(cat).style.display = "block";
+}
+</script>
+
 </head>
-<body style="font-family:sans-serif; text-align:center;">
 
-<h1>🔥 KAPDAVA</h1>
-<p>Style that defines you</p>
+<body>
 
-<h2>Products</h2>
+<header>🔥 KAPDAVA</header>
 
-<p>👕 Shirt - ₹499</p>
-<p>👖 Jeans - ₹999</p>
+<nav>
+  <a onclick="showCategory('men')">Men</a>
+  <a onclick="showCategory('women')">Women</a>
+  <a onclick="showCategory('kids')">Kids</a>
+</nav>
 
-<a href="https://wa.me/8305853662">
-<button>Order on WhatsApp</button>
-</a>
+<div class="search">
+  <input type="text" placeholder="Search products...">
+</div>
+
+<!-- SLIDER -->
+<div class="slider">
+  <img src="https://images.unsplash.com/photo-1445205170230-053b83016050">
+</div>
+
+<!-- MEN -->
+<div id="men" class="section">
+<h2>👨 Men</h2>
+<div class="products">
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1520975922284-6c3a3f3d3f3f">
+<p>Shirt ₹499</p>
+<a href="https://wa.me/918305853662?text=Hello%20KAPDAVA%20mujhe%20Shirt%20chahiye"><button>Order</button></a>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1516826957135-700dedea698c">
+<p>T-Shirt ₹399</p>
+<a href="https://wa.me/918305853662?text=Hello%20KAPDAVA%20mujhe%20T-Shirt%20chahiye"><button>Order</button></a>
+</div>
+
+</div>
+</div>
+
+<!-- WOMEN -->
+<div id="women" class="section" style="display:none;">
+<h2>👩 Women</h2>
+<div class="products">
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1520974735194-9d7c1d8a1f9e">
+<p>Top ₹599</p>
+<a href="https://wa.me/918305853662?text=Hello%20KAPDAVA%20mujhe%20Top%20chahiye"><button>Order</button></a>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1509631179647-0177331693ae">
+<p>Kurti ₹799</p>
+<a href="https://wa.me/918305853662?text=Hello%20KAPDAVA%20mujhe%20Kurti%20chahiye"><button>Order</button></a>
+</div>
+
+</div>
+</div>
+
+<!-- KIDS -->
+<div id="kids" class="section" style="display:none;">
+<h2>🧒 Kids</h2>
+<div class="products">
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1519238263530-99bdd11df2ea">
+<p>Kids Set ₹499</p>
+<a href="https://wa.me/918305853662?text=Hello%20KAPDAVA%20mujhe%20Kids%20Set%20chahiye"><button>Order</button></a>
+</div>
+
+</div>
+</div>
+
+<footer>
+© 2026 KAPDAVA | All Rights Reserved
+</footer>
 
 </body>
 </html>
