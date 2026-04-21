@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Cart</title>
+
+<style>
+body { font-family:Arial; padding:10px; }
+button { background:#ff3f6c; color:white; padding:10px; border:none; width:100%; }
+</style>
+
+<script>
+function loadCart(){
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let list = document.getElementById("list");
+
+  cart.forEach(i=>{
+    let p = document.createElement("p");
+    p.innerText = i;
+    list.appendChild(p);
+  });
+}
+
+function placeOrder(){
+  let name = document.getElementById("name").value;
+  let address = document.getElementById("address").value;
+
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let msg = "Order:%0AName: "+name+"%0AAddress: "+address+"%0A";
+
+  cart.forEach(i=> msg += i+"%0A");
+
+  window.open("https://wa.me/918305853662?text="+msg);
+}
+</script>
+
+</head>
+
+<body onload="loadCart()">
+
+<h2>Your Cart</h2>
+<div id="list"></div>
+
+<h3>Address</h3>
+<input id="name" placeholder="Name"><br><br>
+<textarea id="address" placeholder="Address"></textarea><br><br>
+
+<button onclick="placeOrder()">Order on WhatsApp</button>
+
+<br><br>
+
+<a href="upi://pay?pa=yourupi@upi&pn=KAPDAVA&am=100">
+<button>Pay with UPI</button>
+</a>
+
+</body>
+</html>
